@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f6f8f6">
+  <title>모여 — 모임 날짜 정하기</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="모여 홈"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M8 17.2 13.2 22 24 10"/><path d="M16 3.5a12.5 12.5 0 1 0 12.5 12.5"/></svg></span><span>모여</span></a>
+    <button class="icon-button" id="open-menu" aria-label="모임 메뉴"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  </header>
+
+  <main class="page-shell">
+    <section class="event-heading">
+      <div><div class="event-title-row"><h1 id="event-name">연말 다 같이 저녁</h1><span class="event-status"><i></i> 날짜 조율 중</span></div><div class="event-meta"><span id="event-range">2026년 11월 20일 — 12월 5일</span><span class="meta-dot">·</span><span id="participant-count">5명 참여</span></div></div>
+    </section>
+
+    <section class="card your-card">
+      <label for="my-name">이름</label>
+      <input id="my-name" type="text" list="participant-options" placeholder="이름 입력" autocomplete="name" maxlength="30">
+      <datalist id="participant-options"></datalist>
+    </section>
+
+    <section class="card calendar-card">
+      <div class="calendar-head"><h2>날짜 선택</h2><div class="month-controls"><button class="icon-button" id="prev-month" aria-label="이전 달"><svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button><strong id="month-label"></strong><button class="icon-button" id="next-month" aria-label="다음 달"><svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button></div></div>
+      <div class="calendar-legend"><span><i class="legend-mine"></i> 내 가능</span><span><i class="legend-recommended"></i> 추천</span><span><i class="legend-count"></i> 가능 인원</span></div>
+      <div class="calendar-grid" id="calendar-grid" role="grid" aria-label="날짜 달력"></div>
+      <div class="date-detail" id="date-detail" aria-live="polite"></div>
+    </section>
+
+    <section class="recommend-card">
+      <div class="recommend-top"><span class="recommend-icon"><svg viewBox="0 0 24 24"><path d="m12 3 2.3 5.8L20 11l-5.7 2.2L12 19l-2.3-5.8L4 11l5.7-2.2L12 3Z"/><path d="m19 15 .9 2.1L22 18l-2.1.9L19 21l-.9-2.1L16 18l2.1-.9L19 15Z"/></svg></span><span>추천 날짜</span></div>
+      <div class="final-date" id="final-date"></div>
+      <div class="recommend-list" id="recommend-list"></div>
+    </section>
+
+    <section class="card people-card">
+      <div class="people-head"><h2>참여자 일정</h2><span class="people-total" id="people-total">5명</span></div>
+      <div class="people-list" id="people-list"></div>
+      <button class="show-more" id="show-more" type="button" hidden>더보기</button>
+    </section>
+  </main>
+
+  <dialog class="menu-dialog" id="menu-dialog">
+    <div class="dialog-head"><h2>모임 정보</h2><button class="icon-button" type="button" id="close-menu" aria-label="닫기"><svg viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
+    <div class="menu-event"><strong id="menu-event-name"></strong><span id="menu-event-range"></span></div>
+    <div class="share-row"><div><span class="share-label">초대 링크</span><span class="share-url" id="share-url"></span></div><button class="copy-button" id="copy-button"><svg viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg><span>복사</span></button></div>
+    <button class="button button-outline new-event-button" id="new-event" type="button">모임 만들기</button>
+  </dialog>
+
+  <dialog class="create-dialog" id="create-dialog"><form id="create-form"><div class="dialog-head"><div><h2>모임 만들기</h2></div><button class="icon-button" type="button" id="close-dialog" aria-label="닫기"><svg viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div><label for="new-name">모임 이름</label><input id="new-name" name="name" required maxlength="40" placeholder="예: 송년회"><div class="date-fields"><div><label for="start-date">시작일</label><input type="date" id="start-date" name="start" required></div><div><label for="end-date">종료일</label><input type="date" id="end-date" name="end" required></div></div><p class="form-error" id="form-error" aria-live="polite"></p><button class="button button-dark submit-button" type="submit">만들기</button></form></dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="app.js"></script>
+</body>
+</html>
