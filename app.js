@@ -103,8 +103,7 @@ document.querySelector('#create-form').addEventListener('submit', async event =>
   if(!start || !end || start > end){ error.textContent = '종료일은 시작일과 같거나 이후여야 해요.'; return; } // 날짜 검사
   const id = crypto.randomUUID().slice(0, 8); // 짧은 고유 ID 만들기 (링크가 너무 길지 않게)
   const { error: dbError } = await sb.from('events').insert({ id, name, start_date: start, end_date: end }); // 서버에 모임 저장
-  if(dbError){ error.textContent = '모임 저장에 실패했어요. 다시 시도해 주세요.'; return; } // 실패 시 중단
-  state = { event: { id, name, start, end, finalDate: '' }, participants: [] }; // 화면용 상태 갱신
+if(dbError){ console.error(dbError); error.textContent = '모임 저장에 실패했어요. 다시 시도해 주세요.'; return; } // 실패 시 에러를 콘솔에 출력하고 중단  state = { event: { id, name, start, end, finalDate: '' }, participants: [] }; // 화면용 상태 갱신
   selectedName = ''; selectedDate = start; showAllPeople = false; // 선택 상태 초기화
   view = parseDate(start); // 달력을 시작월로 이동
   history.replaceState(null, '', '#' + id); // 주소에 모임 ID 붙이기 → 이게 초대 링크가 됨
