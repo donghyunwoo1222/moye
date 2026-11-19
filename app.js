@@ -1,5 +1,5 @@
 // Supabase 연결: 첫 번째는 Project URL(이미 넣음), 두 번째는 Publishable(anon) key로 교체하세요
-const sb = supabase.createClient('https://nsuvvjfkmijcmkvvmdyd.supabase.co', 'nsuvvjfkmijcmkvvmdyd');
+const sb = supabase.createClient('https://nsuvvjfkmijcmkvvmdyd.supabase.co', 'sb_publishable_2Sv6FpC-ybw2lN7yQi8jhw_-3xh_O_f');
 // 저장 중인 요청 개수 (0보다 크면 자동 새로고침이 화면을 덮어쓰지 않게 막음)
 let saving = 0;
 // 주소의 # 뒤에 있는 모임 ID를 꺼내는 함수 (예: ...app/#a1b2c3d4 → 'a1b2c3d4')
